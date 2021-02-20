@@ -49,16 +49,6 @@ class ShoppingListController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="shopping_list_show", methods={"GET"})
-     */
-    public function show(ShoppingList $shoppingList): Response
-    {
-        return $this->render('shopping_list/show.html.twig', [
-            'shopping_list' => $shoppingList,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="shopping_list_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, ShoppingList $shoppingList): Response
