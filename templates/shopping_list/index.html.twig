@@ -4,33 +4,41 @@
 
 {% block body %}
     <h1>Shopping Lists</h1>
-    <a href="{{ path('shopping_list_new') }}">Create new</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Price</th>
-                <th>Items</th>
-                <th>CreatedAt</th>
-                <th>Owner</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for shopping_list in shopping_lists %}
-            <tr>
-                <td>{{ shopping_list.price }}</td>
-                <td>{{ shopping_list.shoppingListItems|length }}</td>
-                <td>{{ shopping_list.createdAt|date('d-m-Y H:i') }}</td>
-                <td>{{ shopping_list.owner }}</td>
-                <td>
-                    <a href="{{ path('shopping_list_edit', {'id': shopping_list.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <a href="{{ path('shopping_list_new') }}" class="btn btn-success mb-2">
+        <i class="fas fa-plus"></i>
+        create new
+    </a>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Price</th>
+                    <th>Items</th>
+                    <th>CreatedAt</th>
+                    <th>Owner</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for shopping_list in shopping_lists %}
+                <tr>
+                    <td>{{ shopping_list.price }}</td>
+                    <td>{{ shopping_list.shoppingListItems|length }}</td>
+                    <td>{{ shopping_list.createdAt|date('d-m-Y H:i') }}</td>
+                    <td>{{ shopping_list.owner }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="{{ path('shopping_list_edit', {'id': shopping_list.id}) }}">
+                            <i class="fas fa-pencil-alt"></i>
+                            edit
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

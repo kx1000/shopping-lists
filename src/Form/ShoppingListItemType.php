@@ -13,7 +13,9 @@ class ShoppingListItemType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('isFound')
+            ->add('isFound', null, [
+                'label' => false,
+            ])
         ;
     }
 
@@ -26,6 +28,6 @@ class ShoppingListItemType extends AbstractType
 
     public function getBlockPrefix(): string
     {
-        return 'FruitType';
+        return 'ItemType';
     }
 }

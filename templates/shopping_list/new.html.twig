@@ -3,7 +3,7 @@
 {% block title %}New Shopping List{% endblock %}
 
 {% block body %}
-    <a href="{{ path('shopping_list_index') }}">back</a>
+    {{ include('shopping_list/_back.html.twig') }}
     <h1>Create new Shopping List</h1>
 
     {{ include('shopping_list/_form.html.twig') }}
