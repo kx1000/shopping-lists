@@ -15,8 +15,11 @@
     </head>
     <body
             data-controller="symfony--ux-swup--swup"
-            data-theme="slide"
+            data-theme="fade"
     >
+        <a href="{{ path('home') }}">home</a>
+        <a href="{{ path('swup') }}">swup</a>
+        <a href="{{ path('app_login') }}">login</a>
         <main id="swup">
             {% block body %}{% endblock %}
         </main>
