@@ -28,7 +28,7 @@ class UserFixtures extends Fixture
         $manager->flush();
 
         $user2 = (new User())
-            ->setEmail('karolinagusciora99@wp.pl');
+            ->setEmail('karolinagusciora7@gmail.com');
         $user2->setPassword($this->encoder->encodePassword($user2, 'test123'));
         $manager->persist($user2);
         $manager->flush();

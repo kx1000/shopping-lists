@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -15,8 +16,14 @@
             data-controller="hello symfony--ux-swup--swup"
             data-theme="fade"
     >
-        <main id="swup">
-            {% block body %}{% endblock %}
-        </main>
+    <nav class="navbar navbar-expand-md fixed-top bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#">Our shopping lists</a>
+        </div>
+    </nav>
+
+    <main id="swup" class="container">
+        {% block body %}{% endblock %}
+    </main>
     </body>
 </html>
