@@ -1,4 +1,5 @@
 import { Controller } from 'stimulus';
+import init from "../init";
 
 /*
  * This is an example Stimulus controller!
@@ -11,6 +12,14 @@ import { Controller } from 'stimulus';
  */
 export default class extends Controller {
     connect() {
-        this.element.textContent = 'Hello Stimulus! Edit me in assets/controllers/hello_controller.js';
+        this.element.addEventListener('swup:connect', this._onConnect);
+    }
+
+    disconnect() {
+        this.element.removeEventListener('swup:connect', this._onConnect);
+    }
+
+    _onConnect(event) {
+        event.detail.swup.on('contentReplaced', init.init);
     }
 }

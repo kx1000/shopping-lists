@@ -23,7 +23,7 @@ class ShoppingListType extends AbstractType
                 'by_reference' => false,
                 'prototype' => true,
                 'attr' => array(
-                    'class' => 'my-selector',
+                    'class' => 'collection',
                 ),
             ])
         ;
