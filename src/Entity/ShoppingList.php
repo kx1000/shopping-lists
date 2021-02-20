@@ -25,7 +25,7 @@ class ShoppingList
     private $price;
 
     /**
-     * @ORM\OneToMany(targetEntity=ShoppingListItem::class, mappedBy="shoppingList", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=ShoppingListItem::class, mappedBy="shoppingList", orphanRemoval=true, cascade={"persist"})
      */
     private $shoppingListItems;
 
