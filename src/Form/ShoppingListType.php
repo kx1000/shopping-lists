@@ -22,9 +22,8 @@ class ShoppingListType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'prototype' => true,
-                'attr' => array(
-                    'class' => 'collection',
-                ),
+                'attr' => ['class' => 'collection'],
+                'entry_options' => ['label' => false]
             ])
         ;
     }

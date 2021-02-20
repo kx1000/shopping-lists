@@ -1,5 +1,8 @@
-{% form_theme form 'shopping_list/jquery.collection.html.twig' %}
+{% form_theme form 'shopping_list/jquery.collection.html.twig''shopping_list/formThemeWithButtons.html.twig' %}
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.owner) }}
+    {{ form_row(form.price) }}
+    Items
+    {{ form_row(form.shoppingListItems) }}
     <button class="btn btn-success">{{ button_label|default('save') }}</button>
 {{ form_end(form) }}

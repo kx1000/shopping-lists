@@ -23,4 +23,9 @@ class ShoppingListItemType extends AbstractType
             'data_class' => ShoppingListItem::class,
         ]);
     }
+
+    public function getBlockPrefix(): string
+    {
+        return 'FruitType';
+    }
 }
