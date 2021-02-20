@@ -3,8 +3,6 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -17,9 +15,6 @@
             data-controller="hello symfony--ux-swup--swup"
             data-theme="fade"
     >
-        <a href="{{ path('home') }}">home</a>
-        <a href="{{ path('swup') }}">swup</a>
-        <a href="{{ path('app_login') }}">login</a>
         <main id="swup">
             {% block body %}{% endblock %}
         </main>

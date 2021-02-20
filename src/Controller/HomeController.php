@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
@@ -11,20 +11,12 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(): Response
+    public function index(): RedirectResponse
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+        if (null !== $this->getUser()) {
+            return $this->redirectToRoute('shopping_list_index');
+        }
 
-    /**
-     * @Route("/swup", name="swup")
-     */
-    public function swup(): Response
-    {
-        return $this->render('home/swup.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->redirectToRoute('app_login');
     }
 }
