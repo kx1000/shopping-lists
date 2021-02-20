@@ -42,9 +42,15 @@ class User implements UserInterface
      */
     private $shoppingLists;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ShoppingList::class, mappedBy="createdBy")
+     */
+    private $shoppingListsCreatedBy;
+
     public function __construct()
     {
         $this->shoppingLists = new ArrayCollection();
+        $this->shoppingListsCreatedBy = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -157,6 +163,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($shoppingList->getOwner() === $this) {
                 $shoppingList->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ShoppingList[]
+     */
+    public function getShoppingListsCreatedBy(): Collection
+    {
+        return $this->shoppingListsCreatedBy;
+    }
+
+    public function addShoppingListsCreatedBy(ShoppingList $shoppingListsCreatedBy): self
+    {
+        if (!$this->shoppingListsCreatedBy->contains($shoppingListsCreatedBy)) {
+            $this->shoppingListsCreatedBy[] = $shoppingListsCreatedBy;
+            $shoppingListsCreatedBy->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShoppingListsCreatedBy(ShoppingList $shoppingListsCreatedBy): self
+    {
+        if ($this->shoppingListsCreatedBy->removeElement($shoppingListsCreatedBy)) {
+            // set the owning side to null (unless already changed)
+            if ($shoppingListsCreatedBy->getCreatedBy() === $this) {
+                $shoppingListsCreatedBy->setCreatedBy(null);
             }
         }
 

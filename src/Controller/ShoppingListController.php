@@ -30,7 +30,7 @@ class ShoppingListController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $shoppingList = new ShoppingList();
+        $shoppingList = new ShoppingList($this->getUser());
         $form = $this->createForm(ShoppingListType::class, $shoppingList);
         $form->handleRequest($request);
 

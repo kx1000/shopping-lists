@@ -34,9 +34,22 @@ class ShoppingList
      */
     private $owner;
 
-    public function __construct()
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="shoppingListsCreatedBy")
+     */
+    private $createdBy;
+
+    public function __construct(User $createdBy)
     {
         $this->shoppingListItems = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+        $this->createdBy = $createdBy;
+        $this->owner = $createdBy;
     }
 
     public function getId(): ?int
@@ -94,6 +107,30 @@ class ShoppingList
     public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): self
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }
