@@ -13,7 +13,12 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body
+            data-controller="symfony--ux-swup--swup"
+            data-theme="slide"
+    >
+        <main id="swup">
+            {% block body %}{% endblock %}
+        </main>
     </body>
 </html>

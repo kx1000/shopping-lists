@@ -17,4 +17,14 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    /**
+     * @Route("/swup", name="swup")
+     */
+    public function swup(): Response
+    {
+        return $this->render('home/swup.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }

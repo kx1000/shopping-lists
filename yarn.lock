@@ -862,12 +862,61 @@
   resolved "https://registry.yarnpkg.com/@stimulus/webpack-helpers/-/webpack-helpers-2.0.0.tgz#54296d2a2dffd4f962d2e802d99a3fdd84b8845f"
   integrity sha512-D6tJWsAC024MwGEIKlUVYU8Ln87mlrmiwHvYAjipg+s8H4eLxUMQ3PZkWyPevfipH+oR3leuHsjYsK1gN5ViQA==
 
+"@swup/debug-plugin@^1.0":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@swup/debug-plugin/-/debug-plugin-1.0.3.tgz#345d76f8fe5d0d6b062a9c8e4e59150e83b21562"
+  integrity sha512-uSGrrI0Z4yLvUIYUNAzOGFgotJgjdXPGYCZ/WVGUdkBUWO8rWfSkDi+qCp2V8AdPGFc9TNq8bcR4zO0FPJ+C5g==
+  dependencies:
+    "@swup/plugin" "^1.0.0"
+
+"@swup/fade-theme@^1.0":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@swup/fade-theme/-/fade-theme-1.0.5.tgz#8280c1782e9cb1f68f00d6cd3de024d4f9bfc341"
+  integrity sha512-9PwC7UmW0RZ5eda+JtWz0z0H3kWWW4Ir3fnEnQOLwdS5p+nrvrLGQM3WjUR/kFIuAsU6K40Ty99gtoW6spWYSA==
+  dependencies:
+    "@swup/theme" "^1.0.7"
+
+"@swup/forms-plugin@^1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@swup/forms-plugin/-/forms-plugin-1.1.0.tgz#d1e0b524deb6448a28dbc4b11992a6f0d105bfb5"
+  integrity sha512-bxBk1UN476Ah0SeDUZNDPX5fLk3UU07uN1v8zTxqb0ZEDe0Ssko9gZguRQwbLBSRybafyujZrrbXQqwPWuKBZA==
+  dependencies:
+    "@swup/plugin" "^1.0.0"
+    delegate "^3.1.3"
+    swup "^2.0.13"
+
+"@swup/plugin@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@swup/plugin/-/plugin-1.0.1.tgz#10606322508724a5beaed6a09326d8c30c7041fa"
+  integrity sha512-QrTGn1DLx+50CNsk6oGzUFnyNyLkDK6iLb032qKImmAXS+0Dd1cwa8cSGvJ+I27J4qR8y6oJNurgHIEc6ZCTrg==
+
+"@swup/slide-theme@^1.0":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@swup/slide-theme/-/slide-theme-1.0.5.tgz#743aab844be68c089e0c9b49b906b2a4c2495738"
+  integrity sha512-0xxqtURSMDScjLMRdNjtxzo8NGCPcmp6VXrQcxIQzQDSAvwNnP8Zw871C+FSL1EMe8OhAzWAP3E3x9vzH+iLHg==
+  dependencies:
+    "@swup/theme" "^1.0.6"
+
+"@swup/theme@^1.0.6", "@swup/theme@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@swup/theme/-/theme-1.0.7.tgz#e276fa769af0d800a8df16cbaf71efb665bee297"
+  integrity sha512-OINEaf34fYs90l7/YUUKfOf+paY7/FDhOBLwYxrD0w1OjBiItZpw3N+ATA/QklJwmoUu3KkDFOaQG0zT4KxmmA==
+
 "@symfony/stimulus-bridge@^2.0.0":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@symfony/stimulus-bridge/-/stimulus-bridge-2.0.2.tgz#6108cef42e6d822b0fca26c9e37f80a4fe2f1d2b"
   integrity sha512-n3Ku/mLv825v6+O38WO2U0wkuYL2BA1175cBLg+v8OjE51ujWmXTS9dOBpHjQyo6ETexGpArWH9KcVkkCkA7GA==
   dependencies:
     acorn "^8.0.5"
+
+"@symfony/ux-swup@file:vendor/symfony/ux-swup/Resources/assets":
+  version "1.1.0"
+  dependencies:
+    "@swup/debug-plugin" "^1.0"
+    "@swup/fade-theme" "^1.0"
+    "@swup/forms-plugin" "^1.0"
+    "@swup/slide-theme" "^1.0"
+    swup "^2.0"
 
 "@symfony/webpack-encore@^1.0.0":
   version "1.1.1"
@@ -2016,6 +2065,16 @@ del@^6.0.0:
     p-map "^4.0.0"
     rimraf "^3.0.2"
     slash "^3.0.0"
+
+delegate@3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/delegate/-/delegate-3.1.3.tgz#9a8251a777d7025faa55737bc3b071742127a9fd"
+  integrity sha1-moJRp3fXAl+qVXN7w7BxdCEnqf0=
+
+delegate@^3.1.3:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/delegate/-/delegate-3.2.0.tgz#b66b71c3158522e8ab5744f720d8ca0c2af59166"
+  integrity sha512-IofjkYBZaZivn0V8nnsMJGBr4jVLxHDheKSW88PyxS5QC4Vo9ZbZVvhzlSxY87fVq3STR6r+4cGepyHkcWOQSw==
 
 depd@~1.1.2:
   version "1.1.2"
@@ -3575,6 +3634,11 @@ open@^7.3.0:
     is-docker "^2.0.0"
     is-wsl "^2.1.1"
 
+opencollective-postinstall@^2.0.2:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz#7a0fff978f6dbfa4d006238fbac98ed4198c3259"
+  integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
+
 original@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/original/-/original-1.0.2.tgz#e442a61cffe1c5fd20a65f3261c26663b303f25f"
@@ -4811,6 +4875,14 @@ svgo@^1.0.0:
     stable "^0.1.8"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+swup@^2.0, swup@^2.0.13:
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/swup/-/swup-2.0.14.tgz#17cd68eb487faf2553f1e06bd1d1cb84064de8b9"
+  integrity sha512-a+Ihye+rTOwyW7T/vJYwGEKy9kJwc4twwlBryoKZY6WNutQOdpWUKmCkJdvkrDNIqBAvIqpsGUW1NJvoxZxP8w==
+  dependencies:
+    delegate "3.1.3"
+    opencollective-postinstall "^2.0.2"
 
 tapable@^2.1.1, tapable@^2.2.0:
   version "2.2.0"
