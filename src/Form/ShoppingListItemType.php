@@ -13,6 +13,7 @@ class ShoppingListItemType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('isFound')
         ;
     }
 

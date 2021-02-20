@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Shopping Lists</h1>
-
+    <a href="{{ path('shopping_list_new') }}">Create new</a>
     <table class="table">
         <thead>
             <tr>
@@ -33,6 +33,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('shopping_list_new') }}">Create new</a>
 {% endblock %}

@@ -3,11 +3,9 @@
 {% block title %}Edit Shopping List{% endblock %}
 
 {% block body %}
+    <a href="{{ path('shopping_list_index') }}">back</a>
     <h1>Edit Shopping List</h1>
-
-    {{ include('shopping_list/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('shopping_list_index') }}">back to list</a>
-
     {{ include('shopping_list/_delete_form.html.twig') }}
+
+    {{ include('shopping_list/_form.html.twig', {'button_label': 'update'}) }}
 {% endblock %}

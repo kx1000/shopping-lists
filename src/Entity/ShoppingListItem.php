@@ -28,6 +28,16 @@ class ShoppingListItem
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFound;
+
+    public function __construct()
+    {
+        $this->isFound = false;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,6 +63,18 @@ class ShoppingListItem
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getIsFound(): ?bool
+    {
+        return $this->isFound;
+    }
+
+    public function setIsFound(bool $isFound): self
+    {
+        $this->isFound = $isFound;
 
         return $this;
     }
