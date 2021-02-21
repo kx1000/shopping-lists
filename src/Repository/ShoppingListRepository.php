@@ -14,9 +14,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ShoppingListRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $shoppingListFilter;
+
+    public function __construct(ManagerRegistry $registry, ShoppingListFilter $shoppingListFilter)
     {
         parent::__construct($registry, ShoppingList::class);
+        $this->shoppingListFilter = $shoppingListFilter;
     }
 
      /**
@@ -24,24 +27,28 @@ class ShoppingListRepository extends ServiceEntityRepository
       */
     public function loadByFilters(array $filters = []): array
     {
-        $qb = $this->createQueryBuilder('s')
-            ->orderBy('s.id', 'DESC');
+        $qb = $this->createQueryBuilder('sl')
+            ->orderBy('sl.id', 'DESC');
 
-        if (!empty($filters['fromAt'])) {
-            $qb
-                ->andWhere('s.createdAt >= :fromAt')
-                ->setParameter('fromAt', $filters['fromAt']);
-        }
-
-        if (!empty($filters['toAt'])) {
-            $qb
-                ->andWhere('s.createdAt <= :toAt')
-                ->setParameter('toAt', $filters['toAt']);
-        }
+        $this->shoppingListFilter->applyFilters($qb, $filters, 'sl');
 
         return $qb
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function getSummary(array $filters = []): array
+    {
+        $qb = $this->createQueryBuilder('sl')
+            ->select('SUM(sl.price) as sumPrice, o.email')
+            ->leftJoin('sl.owner', 'o')
+            ->addGroupBy('o.id');
+
+        $this->shoppingListFilter->applyFilters($qb, $filters, 'sl');
+
+        return $qb
+            ->getQuery()
+            ->getResult();
     }
 }

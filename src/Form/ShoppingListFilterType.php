@@ -14,9 +14,11 @@ class ShoppingListFilterType extends AbstractType
         $builder
             ->add('fromAt', DateType::class, [
                 'widget' => 'single_text',
+                'required' => false,
             ])
             ->add('toAt', DateType::class, [
                 'widget' => 'single_text',
+                'required' => false,
             ])
         ;
     }
