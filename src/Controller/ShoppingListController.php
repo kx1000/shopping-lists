@@ -7,6 +7,7 @@ use App\Form\ShoppingListFilterType;
 use App\Form\ShoppingListType;
 use App\Repository\ShoppingListRepository;
 use App\Utils\FilterForm;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,22 +18,37 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ShoppingListController extends AbstractController
 {
-    /**
-     * @Route("/", name="shopping_list_index", methods={"GET", "POST"})
-     */
-    public function index(ShoppingListRepository $shoppingListRepository, FilterForm $filterForm): Response
-    {
-        $filterForm->startWithFilterType(ShoppingListFilterType::class);
+    const LIST_SIZE = 10;
 
+    /**
+     * @Route(
+     *     "/{page}",
+     *     requirements={"page"="\d+"},
+     *     name="shopping_list_index",
+     *     methods={"GET", "POST"}
+     * )
+     */
+    public function index(
+        ShoppingListRepository $shoppingListRepository,
+        FilterForm $filterForm,
+        PaginatorInterface $paginator,
+        int $page = 1
+    ): Response {
+        $filterForm->startWithFilterType(ShoppingListFilterType::class);
+        ;
         return $this->render('shopping_list/index.html.twig', [
-            'shopping_lists' => $shoppingListRepository->loadByFilters($filterForm->getFilters()),
+            'shopping_lists' => $paginator->paginate($shoppingListRepository->loadByFiltersQB($filterForm->getFilters()), $page, self::LIST_SIZE),
             'filter_form' => $filterForm->getForm()->createView(),
             'summaries' => $shoppingListRepository->getSummaries($filterForm->getFilters()),
         ]);
     }
 
     /**
-     * @Route("/new", name="shopping_list_new", methods={"GET","POST"})
+     * @Route(
+     *     "/new",
+     *     name="shopping_list_new",
+     *     methods={"GET","POST"}
+     * )
      */
     public function new(Request $request): Response
     {
@@ -55,7 +71,12 @@ class ShoppingListController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="shopping_list_edit", methods={"GET","POST"})
+     * @Route(
+     *     "/{id}/edit",
+     *     requirements={"id"="\d+"},
+     *     name="shopping_list_edit",
+     *     methods={"GET","POST"}
+     * )
      */
     public function edit(Request $request, ShoppingList $shoppingList): Response
     {
@@ -75,7 +96,12 @@ class ShoppingListController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="shopping_list_delete", methods={"DELETE"})
+     * @Route(
+     *     "/{id}",
+     *     requirements={"id"="\d+"},
+     *     name="shopping_list_delete",
+     *     methods={"DELETE"}
+     * )
      */
     public function delete(Request $request, ShoppingList $shoppingList): Response
     {

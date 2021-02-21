@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\ShoppingList;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -22,20 +23,14 @@ class ShoppingListRepository extends ServiceEntityRepository
         $this->shoppingListFilter = $shoppingListFilter;
     }
 
-     /**
-      * @return ShoppingList[] Returns an array of ShoppingList objects
-      */
-    public function loadByFilters(array $filters = []): array
+    public function loadByFiltersQB(array $filters = []): QueryBuilder
     {
         $qb = $this->createQueryBuilder('sl')
             ->orderBy('sl.id', 'DESC');
 
         $this->shoppingListFilter->applyFilters($qb, $filters, 'sl');
 
-        return $qb
-            ->getQuery()
-            ->getResult()
-        ;
+        return $qb;
     }
 
     public function getSummaries(array $filters = []): array
