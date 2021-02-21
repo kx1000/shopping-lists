@@ -22,10 +22,24 @@ class ShoppingListRepository extends ServiceEntityRepository
      /**
       * @return ShoppingList[] Returns an array of ShoppingList objects
       */
-    public function loadDesc()
+    public function loadAll(array $filters = []): array
     {
-        return $this->createQueryBuilder('s')
-            ->orderBy('s.id', 'DESC')
+        $qb = $this->createQueryBuilder('s')
+            ->orderBy('s.id', 'DESC');
+
+        if (!empty($filters['fromAt'])) {
+            $qb
+                ->andWhere('s.createdAt >= :fromAt')
+                ->setParameter('fromAt', $filters['fromAt']);
+        }
+
+        if (!empty($filters['toAt'])) {
+            $qb
+                ->andWhere('s.createdAt <= :toAt')
+                ->setParameter('toAt', $filters['toAt']);
+        }
+
+        return $qb
             ->getQuery()
             ->getResult()
         ;

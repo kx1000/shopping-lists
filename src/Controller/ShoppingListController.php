@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\ShoppingList;
+use App\Form\ShoppingListFilterType;
 use App\Form\ShoppingListType;
 use App\Repository\ShoppingListRepository;
+use App\Utils\FilterForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,12 +18,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class ShoppingListController extends AbstractController
 {
     /**
-     * @Route("/", name="shopping_list_index", methods={"GET"})
+     * @Route("/", name="shopping_list_index", methods={"GET", "POST"})
      */
-    public function index(ShoppingListRepository $shoppingListRepository): Response
+    public function index(ShoppingListRepository $shoppingListRepository, FilterForm $filterForm): Response
     {
+        $filterForm->startWithFilterType(ShoppingListFilterType::class);
+
         return $this->render('shopping_list/index.html.twig', [
-            'shopping_lists' => $shoppingListRepository->loadDesc(),
+            'shopping_lists' => $shoppingListRepository->loadAll($filterForm->getFilters()),
+            'filter_form' => $filterForm->getForm()->createView(),
         ]);
     }
 
