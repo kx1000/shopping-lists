@@ -25,7 +25,7 @@ class ShoppingListController extends AbstractController
         $filterForm->startWithFilterType(ShoppingListFilterType::class);
 
         return $this->render('shopping_list/index.html.twig', [
-            'shopping_lists' => $shoppingListRepository->loadAll($filterForm->getFilters()),
+            'shopping_lists' => $shoppingListRepository->loadByFilters($filterForm->getFilters()),
             'filter_form' => $filterForm->getForm()->createView(),
         ]);
     }

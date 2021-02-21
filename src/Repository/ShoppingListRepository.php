@@ -22,7 +22,7 @@ class ShoppingListRepository extends ServiceEntityRepository
      /**
       * @return ShoppingList[] Returns an array of ShoppingList objects
       */
-    public function loadAll(array $filters = []): array
+    public function loadByFilters(array $filters = []): array
     {
         $qb = $this->createQueryBuilder('s')
             ->orderBy('s.id', 'DESC');
