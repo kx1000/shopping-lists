@@ -38,7 +38,7 @@ class ShoppingListRepository extends ServiceEntityRepository
         ;
     }
 
-    public function getSummary(array $filters = []): array
+    public function getSummaries(array $filters = []): array
     {
         $qb = $this->createQueryBuilder('sl')
             ->select('SUM(sl.price) as sumPrice, o.email')
