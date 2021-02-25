@@ -17,6 +17,7 @@ class UserType extends AbstractType
             ->add('email')
             ->add('plainPassword', RepeatedType::class, [
                 'mapped' => false,
+                'required' => $options['is_new_user'],
                 'type' => PasswordType::class,
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
@@ -28,6 +29,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'is_new_user' => false,
         ]);
     }
 }
