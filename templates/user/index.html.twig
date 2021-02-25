@@ -3,34 +3,38 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Shopping Lists</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.shoppingLists.count }}</td>
-                <td>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('user_new') }}">Create new</a>
+    <h3>User index</h3>
+    <a href="{{ path('user_new') }}" class="btn btn-success my-2">
+        <i class="fas fa-plus"></i>
+        create new
+    </a>
+    <div class="bg-light p-5 rounded">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Shopping Lists</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.shoppingLists.count }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="{{ path('user_edit', {'id': user.id}) }}">
+                            <i class="fas fa-pencil-alt"></i>
+                            edit
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

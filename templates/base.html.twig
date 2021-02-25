@@ -17,9 +17,16 @@
             data-controller="hello symfony--ux-swup--swup"
             data-theme="fade"
     >
-    <nav class="navbar navbar-expand-md fixed-top bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand text-white" href="#">Our shopping lists</a>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Our shopping lists</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{{ path('shopping_list_index') }}">Shopping Lists</a>
+                <a class="nav-item nav-link" href="{{ path('user_index') }}">Users</a>
+            </div>
         </div>
     </nav>
 
