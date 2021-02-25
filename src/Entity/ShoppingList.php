@@ -31,6 +31,7 @@ class ShoppingList
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="shoppingLists")
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $owner;
 
