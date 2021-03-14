@@ -5,9 +5,9 @@
 <div class="bg-light p-5 rounded">
     {{ form_start(form) }}
         {{ form_row(form.owner) }}
-        {{ form_row(form.price) }}
         Items
         {{ form_row(form.shoppingListItems) }}
+        {{ form_row(form.price) }}
         <button class="btn btn-success">
             <i class="fas fa-save"></i>
             {{ button_label|default('save') }}

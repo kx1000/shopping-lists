@@ -26,7 +26,9 @@ class ShoppingListRepository extends ServiceEntityRepository
     public function loadByFiltersQB(array $filters = []): QueryBuilder
     {
         $qb = $this->createQueryBuilder('sl')
-            ->orderBy('sl.id', 'DESC');
+            ->addSelect('CASE WHEN sl.price IS NULL THEN 1 ELSE 0 END AS HIDDEN isNullPrice')
+            ->orderBy('isNullPrice','DESC')
+            ->addOrderBy('sl.createdAt', 'DESC');
 
         $this->shoppingListFilter->applyFilters($qb, $filters, 'sl');
 

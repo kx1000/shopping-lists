@@ -7,9 +7,8 @@ namespace App\Utils;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\Forms;
 
-class FilterForm
+class Filter
 {
-    private $type;
     /** @var FormInterface */
     private $form;
     private $filters;
@@ -21,8 +20,7 @@ class FilterForm
 
     public function startWithFilterType(string $type): self
     {
-        $this->type = $type;
-        $this->form = Forms::createFormFactory()->create($this->type);
+        $this->form = Forms::createFormFactory()->create($type);
         $this->form->handleRequest();
 
         if ($this->form->isSubmitted() && $this->form->isValid()) {

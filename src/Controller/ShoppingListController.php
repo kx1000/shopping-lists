@@ -6,7 +6,7 @@ use App\Entity\ShoppingList;
 use App\Form\ShoppingListFilterType;
 use App\Form\ShoppingListType;
 use App\Repository\ShoppingListRepository;
-use App\Utils\FilterForm;
+use App\Utils\Filter;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ShoppingListController extends AbstractController
 {
-    const LIST_SIZE = 10;
+    const LIST_SIZE = 5;
 
     /**
      * @Route(
@@ -30,16 +30,15 @@ class ShoppingListController extends AbstractController
      */
     public function index(
         ShoppingListRepository $shoppingListRepository,
-        FilterForm $filterForm,
+        Filter $filter,
         PaginatorInterface $paginator,
         int $page = 1
     ): Response {
-        $filterForm->startWithFilterType(ShoppingListFilterType::class);
-        ;
+        $filter->startWithFilterType(ShoppingListFilterType::class);
         return $this->render('shopping_list/index.html.twig', [
-            'shopping_lists' => $paginator->paginate($shoppingListRepository->loadByFiltersQB($filterForm->getFilters()), $page, self::LIST_SIZE),
-            'filter_form' => $filterForm->getForm()->createView(),
-            'summaries' => $shoppingListRepository->getSummaries($filterForm->getFilters()),
+            'shopping_lists' => $paginator->paginate($shoppingListRepository->loadByFiltersQB($filter->getFilters()), $page, self::LIST_SIZE),
+            'filter_form' => $filter->getForm()->createView(),
+            'summaries' => $shoppingListRepository->getSummaries($filter->getFilters()),
         ]);
     }
 

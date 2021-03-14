@@ -14,7 +14,6 @@ class ShoppingListType extends AbstractType
     {
         $builder
             ->add('owner')
-            ->add('price')
             ->add('shoppingListItems', CollectionType::class, [
                 'entry_type' => ShoppingListItemType::class,
                 'label' => false,
@@ -25,6 +24,7 @@ class ShoppingListType extends AbstractType
                 'attr' => ['class' => 'collection'],
                 'entry_options' => ['label' => false]
             ])
+            ->add('price')
         ;
     }
 

@@ -9,32 +9,34 @@
         create new
     </a>
     <div class="bg-light p-5 rounded">
-        <table class="table">
-            <thead>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
                 <tr>
                     <th>Email</th>
                     <th>Shopping Lists</th>
                     <th>actions</th>
                 </tr>
-            </thead>
-            <tbody>
-            {% for user in users %}
-                <tr>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.shoppingLists.count }}</td>
-                    <td>
-                        <a class="btn btn-sm btn-primary" href="{{ path('user_edit', {'id': user.id}) }}">
-                            <i class="fas fa-pencil-alt"></i>
-                            edit
-                        </a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="3">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.shoppingLists.count }}</td>
+                        <td>
+                            <a class="btn btn-sm btn-primary" href="{{ path('user_edit', {'id': user.id}) }}">
+                                <i class="fas fa-pencil-alt"></i>
+                                edit
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}
