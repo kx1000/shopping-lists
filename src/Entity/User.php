@@ -7,10 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
+ * @ORM\HasLifecycleCallbacks
  */
 class User implements UserInterface
 {
@@ -23,6 +25,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank
+     * @Assert\Length(max=180)
+     * @Assert\Email
      */
     private $email;
 
@@ -33,7 +38,8 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max=255)
      */
     private $password;
 
@@ -46,6 +52,12 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=ShoppingList::class, mappedBy="createdBy")
      */
     private $shoppingListsCreatedBy;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Assert\Type("datetime")
+     */
+    private $createdAt;
 
     public function __construct()
     {
@@ -197,5 +209,25 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTime();
     }
 }

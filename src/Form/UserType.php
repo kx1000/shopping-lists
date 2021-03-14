@@ -19,7 +19,10 @@ class UserType extends AbstractType
                 'mapped' => false,
                 'required' => $options['is_new_user'],
                 'type' => PasswordType::class,
-                'first_options'  => ['label' => 'Password'],
+                'first_options'  => [
+                    'label' => 'Password',
+                    'attr' => ['autocomplete' => 'new-password'],
+                ],
                 'second_options' => ['label' => 'Repeat Password'],
             ])
         ;
