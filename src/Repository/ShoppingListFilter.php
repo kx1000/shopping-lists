@@ -28,6 +28,13 @@ class ShoppingListFilter
                 ->setParameter('category', $filters['category']);
         }
 
+        if (!empty($filters['search'])) {
+            $queryBuilder
+                ->leftJoin($shoppingListAlias . '.shoppingListItems', 'sli')
+                ->andWhere('MATCH_AGAINST(sli.name, :searchterm) > 0')
+                ->setParameter('searchterm', $filters['search']);
+        }
+
         return $queryBuilder;
     }
 }

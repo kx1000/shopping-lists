@@ -6,6 +6,7 @@ use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class ShoppingListFilterType extends AbstractType
@@ -23,6 +24,9 @@ class ShoppingListFilterType extends AbstractType
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
+                'required' => false,
+            ])
+            ->add('search', TextType::class, [
                 'required' => false,
             ])
         ;

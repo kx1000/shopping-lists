@@ -26,7 +26,9 @@ class ShoppingListType extends AbstractType
                 'attr' => ['class' => 'collection'],
                 'entry_options' => ['label' => false]
             ])
-            ->add('price', NumberType::class)
+            ->add('price', NumberType::class, [
+                'required' => false,
+            ])
         ;
     }
 

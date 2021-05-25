@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ShoppingListItemRepository::class)
+ * @ORM\Table(indexes={@ORM\Index(name="search_idx", columns={"name"}, flags={"fulltext"})})
  */
 class ShoppingListItem
 {
