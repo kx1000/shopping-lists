@@ -14,6 +14,7 @@ class ShoppingListType extends AbstractType
     {
         $builder
             ->add('owner')
+            ->add('category')
             ->add('shoppingListItems', CollectionType::class, [
                 'entry_type' => ShoppingListItemType::class,
                 'label' => false,
