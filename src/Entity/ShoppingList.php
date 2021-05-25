@@ -45,6 +45,11 @@ class ShoppingList
      */
     private $createdBy;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="shoppingLists")
+     */
+    private $category;
+
     public function __construct(User $createdBy)
     {
         $this->shoppingListItems = new ArrayCollection();
@@ -132,6 +137,18 @@ class ShoppingList
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
