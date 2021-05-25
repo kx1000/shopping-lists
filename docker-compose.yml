@@ -1,0 +1,32 @@
+version: '3'
+services:
+  database:
+    container_name: wydatki-database
+    image: mysql
+    command: '--default-authentication-plugin=mysql_native_password'
+    ports:
+      - '3307:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  app:
+    container_name: wydatki-app
+    build: .
+    ports:
+      - '8082:80'
+    volumes:
+      - './:/var/www/html/symfony'
+    depends_on:
+      - database
+    links:
+      - database
+  encore:
+    image: 'node:14-alpine'
+    volumes:
+      - './:/var/www/html/symfony'
+    ports:
+      - '8080:8080'
+    working_dir: /var/www/html/symfony
+    command:
+      - yarn
+      - dev-server
+      - '--host=0.0.0.0'

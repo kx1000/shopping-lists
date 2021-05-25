@@ -3,7 +3,15 @@ App to build shopping lists and document history of expenses from these lists fo
 
 ![alt text](https://kacper.tech/files/604df151b8e3f273516322.gif  "Overview")
 
-# Dev requirements
+# Development
+
+```
+docker-compose up
+```
+
+http://localhost:8082
+
+# Requirements
 - php >=7.2.5
 - mysql >= 5.7
 - [composer](https://getcomposer.org/download/)
