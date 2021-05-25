@@ -5,23 +5,25 @@ namespace App\Utils;
 
 
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\Forms;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class Filter
 {
     /** @var FormInterface */
     private $form;
     private $filters;
+    private $requestStack;
 
-    public function __construct()
+    public function __construct(RequestStack $requestStack)
     {
         $this->filters = [];
+        $this->requestStack = $requestStack;
     }
 
-    public function startWithFilterType(string $type): self
+    public function initializeForm(FormInterface $form): self
     {
-        $this->form = Forms::createFormFactory()->create($type);
-        $this->form->handleRequest();
+        $this->form = $form;
+        $this->form->handleRequest($this->requestStack->getCurrentRequest());
 
         if ($this->form->isSubmitted() && $this->form->isValid()) {
              $this->filters = $this->form->getData();

@@ -22,6 +22,12 @@ class ShoppingListFilter
                 ->setParameter('toAt', $filters['toAt']);
         }
 
+        if (!empty($filters['category'])) {
+            $queryBuilder
+                ->andWhere($shoppingListAlias . '.category = :category')
+                ->setParameter('category', $filters['category']);
+        }
+
         return $queryBuilder;
     }
 }

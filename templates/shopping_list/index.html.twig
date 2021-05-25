@@ -25,6 +25,7 @@
                     <tr>
                         <th>Actions</th>
                         <th>Price</th>
+                        <th>Category</th>
                         <th>Items</th>
                         <th>Owner</th>
                         <th>CreatedAt</th>
@@ -40,6 +41,7 @@
                             </a>
                         </td>
                         <td>{{ shopping_list.price }}</td>
+                        <td>{{ shopping_list.category ?? '-' }}</td>
                         <td>{{ shopping_list.shoppingListItems|length }}</td>
                         <td>{{ shopping_list.owner }}</td>
                         <td>{{ shopping_list.createdAt|date('d-m-Y H:i') }}</td>
