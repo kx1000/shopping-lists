@@ -1,0 +1,2 @@
+framework:
+    ide: 'phpstorm://open?file=%%f&line=%%l&/var/www/html/symfony/>%env(LOCAL_DEV_DIR)%'
