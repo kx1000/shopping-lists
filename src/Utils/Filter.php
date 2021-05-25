@@ -6,27 +6,29 @@ namespace App\Utils;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Filter
 {
     /** @var FormInterface */
     private $form;
-    private $filters;
     private $requestStack;
+    private $session;
 
-    public function __construct(RequestStack $requestStack)
+    public function __construct(RequestStack $requestStack, SessionInterface $session)
     {
-        $this->filters = [];
         $this->requestStack = $requestStack;
+        $this->session = $session;
     }
 
     public function initializeForm(FormInterface $form): self
     {
         $this->form = $form;
+        $this->form->setData($this->getFilters());
         $this->form->handleRequest($this->requestStack->getCurrentRequest());
 
         if ($this->form->isSubmitted() && $this->form->isValid()) {
-             $this->filters = $this->form->getData();
+            $this->session->set('filters', $this->form->getData());
         }
 
         return $this;
@@ -34,7 +36,7 @@ class Filter
 
     public function getFilters(): array
     {
-        return $this->filters;
+        return $this->session->get('filters', []);
     }
 
     public function getForm(): FormInterface
