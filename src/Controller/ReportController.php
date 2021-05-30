@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\ShoppingListRepository;
 use App\Utils\Report;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,33 +14,20 @@ class ReportController extends AbstractController
     /**
      * @Route("/report", name="report")
      */
-    public function index(ShoppingListRepository $shoppingListRepository, Report $report, ChartBuilderInterface $chartBuilder): Response
+    public function index(Report $report, ChartBuilderInterface $chartBuilder): Response
     {
         $report->init();
-        dd($report->getLabels());
-        dd($shoppingListRepository->getMonthReportData());
 
         $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
         $chart->setData([
-            'labels' => ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            'datasets' => [
-                [
-                    'label' => 'My First dataset',
-                    'borderColor' => 'rgb(255, 99, 132)',
-                    'data' => [0, 10, 5, 2, 20, 30, 45],
-                ],
-                [
-                    'label' => 'My second dataset',
-                    'borderColor' => 'rgb(50, 50, 50)',
-                    'data' => [10, 20, 15, 22, 50, 10, 45],
-                ],
-            ],
+            'labels' => $report->getLabels(),
+            'datasets' => $report->buildDatasets(),
         ]);
 
         $chart->setOptions([
             'scales' => [
                 'yAxes' => [
-                    ['ticks' => ['min' => 0, 'max' => 100]],
+                    ['ticks' => ['min' => 0, 'max' => 1000]],
                 ],
             ],
         ]);
