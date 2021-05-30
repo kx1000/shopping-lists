@@ -9,7 +9,28 @@ App to build shopping lists and document history of expenses from these lists fo
 docker-compose up
 ```
 
+```
+docker-compose run app .docker/refresh-db.sh
+```
+
 http://localhost:8082
+
+## Useful commands
+
+Example of installing composer package
+```
+docker-compose run app php composer.phar require symfony/ux-chartjs
+```
+
+Installing node packages
+```
+docker-compose run encore yarn install
+```
+
+Load fixtures
+```
+docker-compose run app php bin/console doctrine:fixtures:load --no-interaction
+```
 
 # Requirements
 - php >=7.2.5

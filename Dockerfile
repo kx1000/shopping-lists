@@ -20,5 +20,3 @@ RUN php composer.phar install
 EXPOSE 80
 
 CMD ["apache2-foreground"]
-
-ENTRYPOINT [".docker/refresh-db.sh"]
