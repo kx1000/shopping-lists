@@ -17,11 +17,49 @@ class ShoppingListFixtures extends Fixture implements DependentFixtureInterface
         /** @var User $user2 */
         $user2 = $this->getReference(UserFixtures::REF_USER_2);
 
-        $shoppingList = (new ShoppingList($user1))
+        $shoppingList1 = (new ShoppingList($user1))
             ->setOwner($user1)
             ->setPrice(100.00)
             ->setCreatedAt(new \DateTime('2021-05-28'));
-        $manager->persist($shoppingList);
+        $manager->persist($shoppingList1);
+
+        $shoppingList2 = (new ShoppingList($user1))
+            ->setOwner($user1)
+            ->setPrice(100.00)
+            ->setCreatedAt(new \DateTime('2021-05-18'));
+        $manager->persist($shoppingList2);
+
+        $shoppingList3 = (new ShoppingList($user1))
+            ->setOwner($user1)
+            ->setPrice(100.00)
+            ->setCreatedAt(new \DateTime('2021-04-28'));
+        $manager->persist($shoppingList3);
+
+        $shoppingList4 = (new ShoppingList($user1))
+            ->setOwner($user1)
+            ->setPrice(100.00)
+            ->setCreatedAt(new \DateTime('2021-03-28'));
+        $manager->persist($shoppingList4);
+
+        $shoppingList5 = (new ShoppingList($user2))
+            ->setOwner($user2)
+            ->setPrice(100.00)
+            ->setCreatedAt(new \DateTime('2021-05-28'));
+        $manager->persist($shoppingList5);
+
+        $shoppingList6 = (new ShoppingList($user2))
+            ->setOwner($user2)
+            ->setPrice(100.00)
+            ->setCreatedAt(new \DateTime('2021-05-18'));
+        $manager->persist($shoppingList6);
+
+        // missing april :)
+
+        $shoppingList7 = (new ShoppingList($user2))
+            ->setOwner($user2)
+            ->setPrice(100.00)
+            ->setCreatedAt(new \DateTime('2021-03-28'));
+        $manager->persist($shoppingList7);
 
         $manager->flush();
     }

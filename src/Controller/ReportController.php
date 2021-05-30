@@ -16,7 +16,7 @@ class ReportController extends AbstractController
      */
     public function index(ShoppingListRepository $shoppingListRepository, ChartBuilderInterface $chartBuilder): Response
     {
-        //dd($shoppingListRepository->getMonthReport());
+        dd($shoppingListRepository->getMonthReport());
 
         $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
         $chart->setData([
@@ -24,13 +24,11 @@ class ReportController extends AbstractController
             'datasets' => [
                 [
                     'label' => 'My First dataset',
-                    'backgroundColor' => 'rgb(255, 99, 132)',
                     'borderColor' => 'rgb(255, 99, 132)',
                     'data' => [0, 10, 5, 2, 20, 30, 45],
                 ],
                 [
                     'label' => 'My second dataset',
-                    'backgroundColor' => 'rgb(50, 50, 50)',
                     'borderColor' => 'rgb(50, 50, 50)',
                     'data' => [10, 20, 15, 22, 50, 10, 45],
                 ],
@@ -46,7 +44,6 @@ class ReportController extends AbstractController
         ]);
 
         return $this->render('report/index.html.twig', [
-            'controller_name' => 'ReportController',
             'chart' => $chart,
         ]);
     }
