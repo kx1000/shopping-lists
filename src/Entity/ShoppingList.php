@@ -53,7 +53,7 @@ class ShoppingList
     public function __construct(User $createdBy)
     {
         $this->shoppingListItems = new ArrayCollection();
-        $this->createdAt = new \DateTime();
+        $this->createdAt = $this->createdAt ?? new \DateTime();
         $this->createdBy = $createdBy;
         $this->owner = $createdBy;
     }
