@@ -27,6 +27,11 @@ Installing node packages
 docker-compose run encore yarn install
 ```
 
+Update schema
+```
+docker-compose run app php bin/console doctrine:schema:update --force --dump-sql
+```
+
 Load fixtures
 ```
 docker-compose run app php bin/console doctrine:fixtures:load --no-interaction

@@ -24,14 +24,6 @@ class ReportController extends AbstractController
             'datasets' => $report->buildDatasets(),
         ]);
 
-        $chart->setOptions([
-            'scales' => [
-                'yAxes' => [
-                    ['ticks' => ['min' => 0, 'max' => 1000]],
-                ],
-            ],
-        ]);
-
         return $this->render('report/index.html.twig', [
             'chart' => $chart,
         ]);

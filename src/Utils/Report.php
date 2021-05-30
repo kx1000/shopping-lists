@@ -4,7 +4,6 @@
 namespace App\Utils;
 
 
-use App\Entity\User;
 use App\Repository\ShoppingListRepository;
 use App\Repository\UserRepository;
 
@@ -48,7 +47,7 @@ class Report
         foreach ($this->userRepository->findAll() as $user) {
             $datasets[] = [
                 'label' => $user->getEmail(),
-                'borderColor' => 'rgb(50, 50, 50)',
+                'borderColor' => $user->getColor(),
                 'data' => $this->buildDataForEmail($user->getEmail()),
             ];
         }
@@ -67,7 +66,7 @@ class Report
         return $resultData;
     }
 
-    private function findDataByLabel(string $label, array $data): ?float
+    private function findDataByLabel(string $label, array $data): float
     {
         foreach ($data as $item) {
             if ($label === $item['YearMonth']) {
@@ -75,6 +74,6 @@ class Report
             }
         }
 
-        return null;
+        return 0;
     }
 }
