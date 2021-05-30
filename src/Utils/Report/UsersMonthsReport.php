@@ -1,13 +1,13 @@
 <?php
 
 
-namespace App\Utils;
+namespace App\Utils\Report;
 
 
 use App\Repository\ShoppingListRepository;
 use App\Repository\UserRepository;
 
-class Report
+class UsersMonthsReport
 {
     private $labels;
 
@@ -31,7 +31,7 @@ class Report
             function(array $item) {
                 return $item['YearMonth'];
             },
-            $this->shoppingListRepository->getMonthReportLabels()
+            $this->shoppingListRepository->getMonthsReportLabels()
         );
     }
 
