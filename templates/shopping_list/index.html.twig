@@ -60,13 +60,18 @@
     </div>
     <h4 class="mt-3">Summary</h4>
     <div class="bg-light p-5 rounded">
+        {% set total = 0 %}
         {% if summaries is not empty %}
         <ul class="list-group">
             {% for summary in summaries %}
                 <li class="list-group-item">
                     {{ summary.email }}: {{ summary.sumPrice ?? 0 }}
                 </li>
+                {% set total = total + summary.sumPrice ?? 0 %}
             {% endfor %}
+            <li class="list-group-item">
+                <strong>Total: {{ total }}</strong>
+            </li>
         </ul>
         {% else %}
             No shopping lists

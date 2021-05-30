@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\ShoppingList;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -45,6 +46,56 @@ class ShoppingListRepository extends ServiceEntityRepository
         $this->shoppingListFilter->applyFilters($qb, $filters, 'sl');
 
         return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getMonthsReportLabels(): array
+    {
+        return $this->createQueryBuilder('sl')
+            ->select('SUBSTRING(sl.createdAt, 1, 7) as YearMonth')
+            ->groupBy('YearMonth')
+            ->orderBy('YearMonth', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getMonthReportDataByEmail(?string $email): array
+    {
+        $query = $this->createQueryBuilder('sl')
+            ->select('SUM(sl.price) as monthSum, SUBSTRING(sl.createdAt, 1, 7) as YearMonth')
+            ->groupBy('YearMonth')
+            ->orderBy('YearMonth', 'ASC');
+
+        if (null !== $email) {
+            $query
+                ->addSelect('o.email')
+                ->leftJoin('sl.owner', 'o')
+                ->andWhere('o.email = :email')
+                ->setParameter('email', $email);
+        }
+
+        return $query
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getMonthReportDataByCategory(?Category $category): array
+    {
+        $query = $this->createQueryBuilder('sl')
+            ->select('SUM(sl.price) as monthSum, SUBSTRING(sl.createdAt, 1, 7) as YearMonth')
+            ->groupBy('YearMonth')
+            ->orderBy('YearMonth', 'ASC');
+
+        if (null !== $category) {
+            $query
+                ->andWhere('sl.category = :category')
+                ->setParameter('category', $category);
+        } else {
+            $query->andWhere('sl.category IS null');
+        }
+
+        return $query
             ->getQuery()
             ->getResult();
     }

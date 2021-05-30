@@ -32,6 +32,13 @@ class Category
      */
     private $shoppingLists;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(max=255)
+     */
+    private $color;
+
     public function __toString(): string
     {
         return $this->getName();
@@ -85,6 +92,18 @@ class Category
                 $shoppingList->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }
