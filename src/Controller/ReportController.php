@@ -18,11 +18,12 @@ class ReportController extends AbstractController
     {
         $report->init();
 
-        $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
-        $chart->setData([
-            'labels' => $report->getLabels(),
-            'datasets' => $report->buildDatasets(),
-        ]);
+        $chart = $chartBuilder
+            ->createChart(Chart::TYPE_LINE)
+            ->setData([
+                'labels' => $report->getLabels(),
+                'datasets' => $report->buildDatasets(),
+            ]);
 
         return $this->render('report/index.html.twig', [
             'chart' => $chart,

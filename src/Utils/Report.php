@@ -48,31 +48,31 @@ class Report
             $datasets[] = [
                 'label' => $user->getEmail(),
                 'borderColor' => $user->getColor(),
-                'data' => $this->buildDataForEmail($user->getEmail()),
+                'data' => $this->buildSumArrayForEmail($user->getEmail()),
             ];
         }
 
         $datasets[] = [
-            'label' => 'TOTAL',
+            'label' => 'Total',
             'borderColor' => 'black',
-            'data' => $this->buildDataForEmail(null),
+            'data' => $this->buildSumArrayForEmail(null),
         ];
 
         return $datasets;
     }
 
-    private function buildDataForEmail(?string $email): array
+    private function buildSumArrayForEmail(?string $email): array
     {
         $sourceData = $this->shoppingListRepository->getMonthReportDataByEmail($email);
         $resultData = [];
         foreach ($this->getLabels() as $label) {
-            $resultData[] = $this->findDataByLabel($label, $sourceData);
+            $resultData[] = $this->findSumByLabel($label, $sourceData);
         }
 
         return $resultData;
     }
 
-    private function findDataByLabel(string $label, array $data): float
+    private function findSumByLabel(string $label, array $data): float
     {
         foreach ($data as $item) {
             if ($label === $item['YearMonth']) {
