@@ -3,5 +3,32 @@
 {% block title %}Report{% endblock %}
 
 {% block body %}
-{{ render_chart(chart) }}
+    <div class="bg-light p-3 rounded mb-3">
+        {{ render_chart(chart) }}
+    </div>
+
+    <div class="bg-light p-3 rounded">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">User</th>
+                    {% for label in chart.data.labels %}
+                        <th scope="col">{{ label }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for dataset in chart.data.datasets %}
+                    <tr>
+                        <th scope="row">{{ dataset.label }}</th>
+                        {% for data in dataset.data %}
+                            <td>{{ data }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

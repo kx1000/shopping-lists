@@ -52,10 +52,16 @@ class Report
             ];
         }
 
+        $datasets[] = [
+            'label' => 'TOTAL',
+            'borderColor' => 'black',
+            'data' => $this->buildDataForEmail(null),
+        ];
+
         return $datasets;
     }
 
-    private function buildDataForEmail(string $email): array
+    private function buildDataForEmail(?string $email): array
     {
         $sourceData = $this->shoppingListRepository->getMonthReportDataByEmail($email);
         $resultData = [];
