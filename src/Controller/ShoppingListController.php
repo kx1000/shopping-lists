@@ -34,6 +34,7 @@ class ShoppingListController extends AbstractController
         PaginatorInterface $paginator,
         int $page = 1
     ): Response {
+        dd($shoppingListRepository->getMonthReport());
         $filter->initializeForm($this->createForm(ShoppingListFilterType::class));
         return $this->render('shopping_list/index.html.twig', [
             'shopping_lists' => $paginator->paginate($shoppingListRepository->loadByFiltersQB($filter->getFilters()), $page, self::LIST_SIZE),
