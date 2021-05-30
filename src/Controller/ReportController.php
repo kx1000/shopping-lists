@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ShoppingListRepository;
+use App\Utils\Report;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,9 +15,11 @@ class ReportController extends AbstractController
     /**
      * @Route("/report", name="report")
      */
-    public function index(ShoppingListRepository $shoppingListRepository, ChartBuilderInterface $chartBuilder): Response
+    public function index(ShoppingListRepository $shoppingListRepository, Report $report, ChartBuilderInterface $chartBuilder): Response
     {
-        dd($shoppingListRepository->getMonthReport());
+        $report->init();
+        dd($report->getLabels());
+        dd($shoppingListRepository->getMonthReportData());
 
         $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
         $chart->setData([

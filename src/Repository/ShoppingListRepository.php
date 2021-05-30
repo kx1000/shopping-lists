@@ -49,7 +49,16 @@ class ShoppingListRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getMonthReport(): array
+    public function getMonthReportLabels(): array
+    {
+        return $this->createQueryBuilder('sl')
+            ->select('SUBSTRING(sl.createdAt, 1, 7) as YearMonth')
+            ->groupBy('YearMonth')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getMonthReportData(): array
     {
         return $this->createQueryBuilder('sl')
             ->select('SUM(sl.price) as monthSum, SUBSTRING(sl.createdAt, 1, 7) as YearMonth, o.email')
