@@ -10,10 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 
+/**
+ * @Route("/in/report")
+ */
 class ReportController extends AbstractController
 {
     /**
-     * @Route("/report", name="report")
+     * @Route("/", name="report")
      */
     public function index(UsersMonthsReport $usersMonthsReport, CategoriesMonthsReport $categoriesMonthsReport, ChartBuilderInterface $chartBuilder): Response
     {

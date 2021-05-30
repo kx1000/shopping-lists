@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/shopping_list")
+ * @Route("/in/shopping_list")
  */
 class ShoppingListController extends AbstractController
 {
