@@ -15,17 +15,20 @@ class CategoryFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $categoryFood = (new Category())
-            ->setName('Food');
+            ->setName('Food')
+            ->setColor('#ff0000');
         $manager->persist($categoryFood);
         $this->addReference(self::REF_CATEGORY_FOOD, $categoryFood);
 
         $categoryBills = (new Category())
-            ->setName('Bills');
+            ->setName('Bills')
+            ->setColor('#00b502');
         $manager->persist($categoryBills);
         $this->addReference(self::REF_CATEGORY_BILLS, $categoryBills);
 
         $categoryChemistry = (new Category())
-            ->setName('Chemistry');
+            ->setName('Chemistry')
+            ->setColor('#0014ff');
         $manager->persist($categoryChemistry);
         $this->addReference(self::REF_CATEGORY_CHEMISTRY, $categoryChemistry);
 

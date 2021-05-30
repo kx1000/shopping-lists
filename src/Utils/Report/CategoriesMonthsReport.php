@@ -49,14 +49,14 @@ class CategoriesMonthsReport
         foreach ($this->categoryRepository->findAll() as $category) {
             $datasets[] = [
                 'label' => $category->getName(),
-                'borderColor' => 'red',
+                'backgroundColor' => $category->getColor(),
                 'data' => $this->buildSumArrayForCategory($category),
             ];
         }
 
         $datasets[] = [
             'label' => 'null',
-            'borderColor' => 'black',
+            'backgroundColor' => null,
             'data' => $this->buildSumArrayForCategory(null),
         ];
 
