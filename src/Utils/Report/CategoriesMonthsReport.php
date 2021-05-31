@@ -7,9 +7,8 @@ namespace App\Utils\Report;
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use App\Repository\ShoppingListRepository;
-use App\Repository\UserRepository;
 
-class CategoriesMonthsReport
+class CategoriesMonthsReport implements ReportInterface
 {
     private $labels;
 

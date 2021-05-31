@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Utils\ChartFactory;
 use App\Utils\Report\CategoriesMonthsReport;
 use App\Utils\Report\UsersMonthsReport;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,27 +19,11 @@ class ReportController extends AbstractController
     /**
      * @Route("/", name="report")
      */
-    public function index(UsersMonthsReport $usersMonthsReport, CategoriesMonthsReport $categoriesMonthsReport, ChartBuilderInterface $chartBuilder): Response
+    public function index(UsersMonthsReport $usersMonthsReport, CategoriesMonthsReport $categoriesMonthsReport, ChartFactory $chartFactory): Response
     {
-        $usersMonthsReport->init();
-        $usersChart = $chartBuilder
-            ->createChart(Chart::TYPE_LINE)
-            ->setData([
-                'labels' => $usersMonthsReport->getLabels(),
-                'datasets' => $usersMonthsReport->buildDatasets(),
-            ]);
-
-        $categoriesMonthsReport->init();
-        $categoriesChart = $chartBuilder
-            ->createChart(Chart::TYPE_BAR)
-            ->setData([
-                'labels' => $categoriesMonthsReport->getLabels(),
-                'datasets' => $categoriesMonthsReport->buildDatasets(),
-            ]);
-
         return $this->render('report/index.html.twig', [
-            'users_chart' => $usersChart,
-            'categories_chart' => $categoriesChart,
+            'users_chart' => $chartFactory->create(Chart::TYPE_LINE, $usersMonthsReport),
+            'categories_chart' => $chartFactory->create(Chart::TYPE_BAR, $categoriesMonthsReport),
         ]);
     }
 }

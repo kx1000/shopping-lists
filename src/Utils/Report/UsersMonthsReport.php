@@ -7,7 +7,7 @@ namespace App\Utils\Report;
 use App\Repository\ShoppingListRepository;
 use App\Repository\UserRepository;
 
-class UsersMonthsReport
+class UsersMonthsReport implements ReportInterface
 {
     private $labels;
 
